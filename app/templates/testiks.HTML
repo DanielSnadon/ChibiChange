@@ -14,20 +14,18 @@
         {% endfor %}
     </ul>
 
-    <!-- Личный кабинет -->
+    <!-- Главная Страница -->
     <p>
         {% if current_user.is_authenticated %}
             <!-- Иконка и имя пользователя -->
-            <a href="{{ url_for('home') }}">
+            <a href="{{ url_for('profile') }}">
                 {{ current_user.username }}
             </a>
             <!-- Ссылка на выход -->
             <a href="{{ url_for('logout') }}" style="margin-left: 10px;">Logout</a>
         {% else %}
             <!-- Ссылка на страницу входа -->
-            <a href="{{ url_for('login') }}">
-                Login
-            </a>
+            <a href="{{ url_for('login') }}">Login</a>
         {% endif %}
     </p>
 

@@ -39,6 +39,11 @@ def register_routes(app):
     def logout():
         logout_user()
         return redirect(url_for('home'))  # Перенаправление на страницу входа
+    
+    @app.route('/profile')
+    @login_required
+    def profile():
+        return render_template('profile.html', user=current_user)
 
     @app.route('/')
     def home():
