@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ChibiChange</title>
+</head>
+<body>
+    <h1>Chibi</h1>
+    <h2>Change</h2>
+    <p>Ruble</p>
+
+    <ul>
+        {% for item in currencies %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Личный кабинет -->
+    <p>
+        {% if current_user.is_authenticated %}
+            <!-- Иконка и имя пользователя -->
+            <a href="{{ url_for('home') }}">
+                {{ current_user.username }}
+            </a>
+            <!-- Ссылка на выход -->
+            <a href="{{ url_for('logout') }}" style="margin-left: 10px;">Logout</a>
+        {% else %}
+            <!-- Ссылка на страницу входа -->
+            <a href="{{ url_for('login') }}">
+                Login
+            </a>
+        {% endif %}
+    </p>
+
+</body>
+</html>
