@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>ChibiChange</title>
+    <title>ChibiChange</title>
 </head>
 <body>
+    <h1>Chibi</h1>
+    <h2>Change</h2>
+    <p>Ruble</p>
 
-<h1>Chibi</h1>
-<h2>Change</h2>
-<p>Ruble</p>
-
-<ul>
-    <li>dollar</li>
-    <li>euro</li>
-    <li>linganguliguli</li>
-</ul>
-
+    <ul>
+        {% for item in currencies %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
