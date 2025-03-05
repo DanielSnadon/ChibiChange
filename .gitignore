@@ -7,5 +7,4 @@ __pycache__/
 *.pyo
 
 # Игнорируем базы данных
-database.db
-instance/
+instance/database.db
