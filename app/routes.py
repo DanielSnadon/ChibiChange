@@ -29,24 +29,20 @@ def register_routes(app):
             if user and user.check_password(form.password.data):
                 login_user(user)
                 flash('Login successful!', 'success')
-                return redirect(url_for('dashboard'))
+                return redirect(url_for('home'))  # Перенаправление на домашнюю страницу
             else:
                 flash('Invalid username or password', 'danger')
         return render_template('login.html', form=form)
-
-    @app.route('/dashboard')
-    @login_required
-    def dashboard():
-        return f"Hello, {current_user.username}! Welcome to your dashboard."
 
     @app.route('/logout')
     @login_required
     def logout():
         logout_user()
         flash('You have been logged out.', 'info')
-        return redirect(url_for('login'))
+        return redirect(url_for('login'))  # Перенаправление на страницу входа
 
     @app.route('/')
     def home():
         currencies = ["dollar", "euro", "linganguliguli"]
         return render_template('testiks.html', currencies=currencies)
+

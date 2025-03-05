@@ -13,5 +13,21 @@
             <li>{{ item }}</li>
         {% endfor %}
     </ul>
+
+    <!-- Личный кабинет -->
+    <p>
+        {% if current_user.is_authenticated %}
+            <!-- Иконка и имя пользователя -->
+            <a href="{{ url_for('home') }}">
+                {{ current_user.username }}
+            </a>
+        {% else %}
+            <!-- Ссылка на страницу входа -->
+            <a href="{{ url_for('login') }}">
+                Login
+            </a>
+        {% endif %}
+    </p>
+
 </body>
 </html>
