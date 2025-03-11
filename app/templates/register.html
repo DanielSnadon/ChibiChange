@@ -2,12 +2,25 @@
 <html>
 <head>
     <title>Register</title>
+    <style>
+        /* Верхняя панель */
+        .top-bar {
+            background-color: #f1f1f1; /* Цвет фона панели */
+            padding: 10px 20px; /* Отступы панели */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Линия тени */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
 
-    <header>
+    <!-- Верхняя панель с названием сайта -->
+    <div class="top-bar">
+        <!-- Название сайта -->
         <h1><a href="{{ url_for('home') }}" style="text-decoration: none; color: black;">ChibiChange</a></h1>
-    </header>
+    </div>
     
     <h2>Register</h2>
 
