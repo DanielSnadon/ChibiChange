@@ -28,7 +28,6 @@ def register_routes(app):
             user = User.query.filter_by(username=form.username.data).first()
             if user and user.check_password(form.password.data):
                 login_user(user)
-                flash('Login successful!', 'success')
                 return redirect(url_for('home'))  # Перенаправление на домашнюю страницу
             else:
                 flash('Invalid username or password', 'danger')
