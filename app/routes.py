@@ -9,22 +9,29 @@ def register_routes(app):
     def register():
         form = RegistrationForm()
         if form.validate_on_submit():
+            # Проверяем, есть ли пользователь с таким именем пользователя или email
             existing_user = User.query.filter_by(username=form.username.data).first()
             if existing_user:
                 flash('Username already taken, please choose another one', 'danger')
             else:
-                new_user = User(username=form.username.data)
-                new_user.set_password(form.password.data)
-                db.session.add(new_user)
-                db.session.commit()
-                flash('Registration successful! Please log in.', 'success')
-                return redirect(url_for('login'))
+                existing_email = User.query.filter_by(email=form.email.data).first()
+                if existing_email:
+                    flash('Email already registered, please choose another one', 'danger')
+                else:
+                    # Создаем нового пользователя
+                    new_user = User(username=form.username.data, email=form.email.data)
+                    new_user.set_password(form.password.data)
+                    db.session.add(new_user)
+                    db.session.commit()
+                    flash('Registration successful! Please log in.', 'success')
+                    return redirect(url_for('login'))
         return render_template('register.html', form=form)
 
     @app.route('/login', methods=['GET', 'POST'])
     def login():
         form = LoginForm()
         if form.validate_on_submit():
+            # Проверяем, существует ли пользователь с таким именем
             user = User.query.filter_by(username=form.username.data).first()
             if user and user.check_password(form.password.data):
                 login_user(user)
