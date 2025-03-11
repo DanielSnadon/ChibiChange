@@ -4,6 +4,7 @@ from app.models import User
 from app.forms import RegistrationForm, LoginForm
 from flask_login import login_user, logout_user, login_required, current_user
 
+
 def register_routes(app):
     @app.route('/register', methods=['GET', 'POST'])
     def register():
@@ -25,6 +26,11 @@ def register_routes(app):
                     db.session.commit()
                     flash('Registration successful! Please log in.', 'success')
                     return redirect(url_for('login'))
+        else:
+            # Если форма не прошла валидацию, выводим ошибки через flash
+            for field, errors in form.errors.items():
+                for error in errors:
+                    flash(error, 'danger')
         return render_template('register.html', form=form)
 
     @app.route('/login', methods=['GET', 'POST'])
