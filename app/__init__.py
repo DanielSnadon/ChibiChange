@@ -18,7 +18,6 @@ def create_app():
     login_manager.init_app(app)
     migrate.init_app(app, db)
     
-    # Set the login view
     login_manager.login_view = 'login'
     
     from app import routes

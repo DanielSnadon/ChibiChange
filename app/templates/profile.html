@@ -4,8 +4,15 @@
     <title>Profile</title>
 </head>
 <body>
-    <h1>Welcome, {{ user.username }}!</h1>
-    <p>Your balance: $134.243.253</p>
+    <header>
+        <h1><a href="{{ url_for('home') }}" style="text-decoration: none; color: black;">ChibiChange</a></h1>
+    </header>
+
+    <h2>Profile details:</h2>
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Balance:</strong> $134.243.253</p>
+
     <p><a href="{{ url_for('logout') }}" style="margin-left: 10px;">Logout</a></p>
 </body>
 </html>
