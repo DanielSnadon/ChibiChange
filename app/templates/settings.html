@@ -50,29 +50,28 @@
 
         <!-- Контейнер для правой части панели -->
         <div class="top-bar-right">
-            {% if current_user.is_authenticated %}
                 <!-- Круглая иконка с первой буквой имени -->
                 <a href="{{ url_for('profile') }}" title="Profile">
-                    <div class="user-icon">{{ current_user.username[0] }}</div>
+                    <div class="user-icon" style="margin-right: 5px">{{ current_user.username[0] }}</div>
                 </a>
-                <!-- Иконка настроек -->
-                <a href="{{ url_for('settings') }}" title="Settings">
-                    <img src="{{ url_for('static', filename='settings-icon.png') }}" alt="Settings" width="45" height="45" style="margin-left: 0px; margin-top: 5px;">
+                <!-- Иконка выхода -->
+                <a href="{{ url_for('logout') }}" title="Logout">
+                    <img src="{{ url_for('static', filename='logout-icon.png') }}" alt="Logout" width="35" height="40" style="margin-right: 5px; margin-top: 5px;">
                 </a>
-            {% else %}
-                <a href="{{ url_for('login') }}" 
-                   style="text-decoration: none; color: black; font-size: 22px; padding: 6px 12px; border: 3px solid black; border-radius: 5px;">
-                    Login
-                </a>
-                <a href="{{ url_for('register') }}" 
-                   style="text-decoration: none; color: black; font-size: 22px; padding: 6px 12px; border: 3px solid black; border-radius: 5px;">
-                    Register
-                </a>
-            {% endif %}
         </div>
     </div>
 
-    <p>Ruble</p>
+    <!-- Уведомления по email -->
+    <div>
+        <p>Would you like to receive notifications via email?</p>
+        <input type="checkbox" id="email-notifications" name="email-notifications" disabled>
+        <label for="email-notifications">Yes, send me email notifications</label>
+    </div>
+
+       <!-- Кнопка-ссылка для перехода на страницу смены пароля -->
+    <a href="{{ url_for('change_password') }}" class="button-link">
+        <button type="button" style="margin-left: 20px; margin-top: 20px;">Change Password</button>
+    </a>
 
     <ul>
         {% for item in currencies %}

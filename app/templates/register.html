@@ -2,16 +2,48 @@
 <html>
 <head>
     <title>Register</title>
+    <style>
+        /* Верхняя панель */
+        .top-bar {
+            background-color: #f1f1f1; /* Цвет фона панели */
+            padding: 10px 20px; /* Отступы панели */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Линия тени */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
+
+    <!-- Верхняя панель с названием сайта -->
+    <div class="top-bar">
+        <!-- Название сайта -->
+        <h1><a href="{{ url_for('home') }}" style="text-decoration: none; color: black;">ChibiChange</a></h1>
+    </div>
+    
     <h2>Register</h2>
+
+    <!-- Выводим сообщения, переданные через flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <p style="color: {{ 'red' if category == 'danger' else 'green' }}">{{ message }}</p>
+        {% endfor %}
+        {% set _ = session.pop('_flashes', None) %}
+    {% endif %}
+    {% endwith %}
+    
     <form method="POST">
         {{ form.hidden_tag() }}
         <p>{{ form.username.label }} {{ form.username() }}</p>
+        <p>{{ form.email.label }} {{ form.email() }}</p>
         <p>{{ form.password.label }} {{ form.password() }}</p>
         <p>{{ form.confirm_password.label }} {{ form.confirm_password() }}</p>
         <p>{{ form.submit() }}</p>
     </form>
+
     <a href="{{ url_for('login') }}">Already have an account? Login</a>
+
 </body>
 </html>

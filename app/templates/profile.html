@@ -2,10 +2,41 @@
 <html>
 <head>
     <title>Profile</title>
+    <style>
+        /* Верхняя панель */
+        .top-bar {
+            background-color: #f1f1f1; /* Цвет фона панели */
+            padding: 10px 20px; /* Отступы панели */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Линия тени */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome, {{ user.username }}!</h1>
-    <p>Your balance: $134.243.253</p>
-    <p><a href="{{ url_for('logout') }}" style="margin-left: 10px;">Logout</a></p>
+
+    <!-- Верхняя панель с названием сайта и логином/именем -->
+    <div class="top-bar">
+        <!-- Название сайта -->
+        <h1><a href="{{ url_for('home') }}" style="text-decoration: none; color: black;">ChibiChange</a></h1>
+
+        <!-- Иконка настроек -->
+        <a href="{{ url_for('settings') }}" title="Settings">
+            <img src="{{ url_for('static', filename='settings-icon.png') }}" alt="Settings" width="45" height="45" style="margin-left: 0px; margin-top: 5px;">
+        </a>
+    </div>
+
+    <h2>Profile details:</h2>
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Balance:</strong> $134.243.253</p>
+
+    <ul>
+        {% for item in currencies %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+
 </body>
 </html>
