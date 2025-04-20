@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>ChibiChange</title>
     <style>
         /* Верхняя панель */
         .top-bar {
-            background-color: #f1f1f1;
-            /* Цвет фона панели */
-            padding: 10px 20px;
-            /* Отступы панели */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            /* Линия тени */
+            background-color: #f1f1f1; /* Цвет фона панели */
+            padding: 10px 20px; /* Отступы панели */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Линия тени */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -29,45 +25,36 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 45px;
-            /* Ширина иконки */
-            height: 45px;
-            /* Высота иконки */
-            border-radius: 50%;
-            /* Круглая форма */
-            background-color: #b0b0b0;
-            /* Цвет фона иконки */
-            color: rgb(0, 0, 0);
-            /* Цвет текста */
-            font-size: 25px;
-            /* Размер шрифта */
-            font-weight: bold;
-            /* Жирный шрифт */
+            width: 45px;  /* Ширина иконки */
+            height: 45px; /* Высота иконки */
+            border-radius: 50%;  /* Круглая форма */
+            background-color: #b0b0b0;  /* Цвет фона иконки */
+            color: rgb(0, 0, 0);  /* Цвет текста */
+            font-size: 25px;  /* Размер шрифта */
+            font-weight: bold;  /* Жирный шрифт */
             text-align: center;
-            line-height: 45px;
-            /* Центрирование буквы */
+            line-height: 45px; /* Центрирование буквы */
         }
 
         a {
             text-decoration: none;
         }
-    </style>
-    <style>
+
         /* Основной контейнер для центрирования содержимого */
         .main-content {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
+            padding: 30px;
         }
         
         /* Контейнер для карточек */
         .cards-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+            gap: 55px;
             width: 70%;
-            max-width: 1400px;
+            max-width: 1200px;
         }
         
         /* Стили для карточек */
@@ -81,8 +68,9 @@
             transition: all 0.3s ease;
             text-decoration: none;
             color: inherit;
-            padding: 15px;
-            height: 300px;
+            padding: 20px;
+            height: 500px;
+            width: 100%;
         }
         
         .card:hover {
@@ -91,43 +79,62 @@
             background-color: #e9ecef;
         }
         
-        /* Контейнер для графика */
-        .chart-placeholder {
-            height: 120px;
+        /* Заголовок карточки с названием и изменением цены */
+        .card-header {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            font-size: 60px;
             margin-bottom: 15px;
-            background-color: #e9ecef;
-            border-radius: 8px;
-        }
-        
-        .currency-info {
-            margin-top: auto;
-            text-align: center;
-        }
-        
-        .card-icon {
-            font-size: 36px;
-            margin-bottom: 10px;
         }
         
         .card-title {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: bold;
-            margin-bottom: 5px;
         }
         
-        .card-description {
-            font-size: 14px;
-            color: #b0b0b0;
+        /* Стиль для изменения цены */
+        .change {
+            font-size: 16px;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        
+        /* Положительное изменение */
+        .change.positive {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        /* Отрицательное изменение */
+        .change.negative {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        /* Контейнер для графика */
+        .chart-placeholder {
+            height: 300px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 80px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        /* Стиль для цены */
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
         }
     </style>
 </head>
 
 <body>
-
     <!-- Верхняя панель с названием сайта и логином/именем -->
     <div class="top-bar">
         <!-- Название сайта -->
@@ -136,47 +143,53 @@
         <!-- Контейнер для правой части панели -->
         <div class="top-bar-right">
             {% if current_user.is_authenticated %}
-            <!-- Круглая иконка с первой буквой имени -->
-            <a href="{{ url_for('profile') }}" title="Profile">
-                <div class="user-icon">{{ current_user.username[0] }}</div>
-            </a>
-            <!-- Иконка настроек -->
-            <a href="{{ url_for('settings') }}" title="Settings">
-                <img src="{{ url_for('static', filename='settings-icon.png') }}" alt="Settings" width="45" height="45"
-                    style="margin-left: 0px; margin-top: 5px;">
-            </a>
+                <!-- Круглая иконка с первой буквой имени -->
+                <a href="{{ url_for('profile') }}" title="Profile">
+                    <div class="user-icon">{{ current_user.username[0] }}</div>
+                </a>
+                <!-- Иконка настроек -->
+                <a href="{{ url_for('settings') }}" title="Settings">
+                    <img src="{{ url_for('static', filename='settings-icon.png') }}" alt="Settings" width="45" height="45" style="margin-left: 0px; margin-top: 5px;">
+                </a>
             {% else %}
-            <a href="{{ url_for('login') }}"
-                style="text-decoration: none; color: black; font-size: 22px; padding: 6px 12px; border: 3px solid black; border-radius: 5px;">
-                Login
-            </a>
-            <a href="{{ url_for('register') }}"
-                style="text-decoration: none; color: black; font-size: 22px; padding: 6px 12px; border: 3px solid black; border-radius: 5px;">
-                Register
-            </a>
+                <!-- Кнопка входа -->
+                <a href="{{ url_for('login') }}" style="text-decoration: none; color: black; font-size: 22px; padding: 6px 12px; border: 3px solid black; border-radius: 5px;">
+                    Login
+                </a>
+                <!-- Кнопка регистрации -->
+                <a href="{{ url_for('register') }}" style="text-decoration: none; color: black; font-size: 22px; padding: 6px 12px; border: 3px solid black; border-radius: 5px;">
+                    Register
+                </a>
             {% endif %}
         </div>
     </div>
 
+    <!-- Основное содержимое страницы -->
     <div class="main-content">
-        <h2 style="text-align: center; width: 70%; margin-bottom: 30px;">Available Currencies</h2>
+        <!-- Заголовок раздела -->
+        <h2 style="text-align: center; width: 80%; margin-bottom: 30px;">Available Currencies</h2>
+        
+        <!-- Контейнер с карточками валют -->
         <div class="cards-container">
             {% for currency in currencies %}
+                <!-- Карточка валюты -->
                 <a href="{{ url_for('currency_detail', currency_name=currency.name) }}" class="card">
-                    <!-- Заглушка для графика -->
-                    <div class="chart-placeholder">📈</div>
-                    
-                    <!-- Информация о валюте -->
-                    <div class="currency-info">
-                        <div class="card-icon">{{ currency.icon }}</div>
-                        <div class="card-title">{{ currency.name|capitalize }}</div>
-                        <div class="card-description">{{ currency.description }}</div>
+                    <!-- Заголовок карточки с названием и изменением цены -->
+                    <div class="card-header">
+                        <div class="card-title">{{ currency.name|upper }}</div>
+                        <div class="change {% if currency.change.startswith('+') %}positive{% else %}negative{% endif %}">
+                            {{ currency.change }}
+                        </div>
                     </div>
+                    
+                    <!-- График (заглушка) -->
+                    <div class="chart-placeholder">{{ currency.icon }}</div>
+                    
+                    <!-- Цена -->
+                    <div class="price">{{ currency.price }}</div>
                 </a>
             {% endfor %}
         </div>
     </div>
-
 </body>
-
 </html>

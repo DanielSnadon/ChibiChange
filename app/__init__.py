@@ -20,8 +20,7 @@ def create_app():
     
     login_manager.login_view = 'login'
     
-    from app import routes
-    from app.models import User
+    from app.models import User, CurrencyPrice
 
     @login_manager.user_loader
     def load_user(user_id):

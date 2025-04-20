@@ -1,6 +1,7 @@
 from app import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -13,3 +14,9 @@ class User(db.Model, UserMixin):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+    
+class CurrencyPrice(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    currency_name = db.Column(db.String(50), nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
