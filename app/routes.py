@@ -103,57 +103,69 @@ def register_routes(app):
 
         return render_template("change_password.html", form=form)
 
-    @app.route('/')
+    @app.route("/")
     def home():
         # Получение текущих цен из парсера
         current_price_data = current_prices
-        
+
         # Получение цен 24 часа назад из базы данных
         twenty_four_hours_ago = datetime.utcnow() - timedelta(minutes=15)
         old_prices = {}
-        
+
         for currency_name in current_price_data.keys():
-            price_record = CurrencyPrice.query.filter(
-                CurrencyPrice.currency_name == currency_name,
-                CurrencyPrice.timestamp <= twenty_four_hours_ago
-            ).order_by(CurrencyPrice.timestamp.desc()).first()
-            
+            price_record = (
+                CurrencyPrice.query.filter(
+                    CurrencyPrice.currency_name == currency_name,
+                    CurrencyPrice.timestamp <= twenty_four_hours_ago,
+                )
+                .order_by(CurrencyPrice.timestamp.desc())
+                .first()
+            )
+
             if price_record:
                 old_prices[currency_name] = price_record.price
-        
+
         currencies = []
         for currency_name, current_price in current_price_data.items():
             # Сохранение текущей цены в базу
             price_record = CurrencyPrice(
                 currency_name=currency_name,
                 price=current_price,
-                timestamp=datetime.utcnow()
+                timestamp=datetime.utcnow(),
             )
             db.session.add(price_record)
-            
+
             # Рассчитываем изменение за 24 часа
             change_percent = ""
             if currency_name in old_prices and old_prices[currency_name] != 0:
-                change = ((current_price - old_prices[currency_name]) / old_prices[currency_name]) * 100
+                change = (
+                    (current_price - old_prices[currency_name])
+                    / old_prices[currency_name]
+                ) * 100
                 change_percent = f"{change:+.2f}%"
-            
-            currencies.append({
-                "name": currency_name,
-                "icon": get_currency_icon(currency_name),  # Функция для получения иконки
-                "change": change_percent,
-                "price": f"{current_price}",
-                "current_price": current_price,
-                "old_price": old_prices.get(currency_name)
-            })
-        
+
+            currencies.append(
+                {
+                    "name": currency_name,
+                    "icon": get_currency_icon(
+                        currency_name
+                    ),  # Функция для получения иконки
+                    "change": change_percent,
+                    "price": f"{current_price:.2f}",
+                    "current_price": current_price,
+                    "old_price": old_prices.get(currency_name),
+                }
+            )
+
         db.session.commit()
-        
-        return render_template('testiks.html', currencies=currencies)
+
+        return render_template("testiks.html", currencies=currencies)
 
     @app.route("/currency/<currency_name>")
     def currency_detail(currency_name):
-        
+
         return render_template("currency_detail.html", currency_name=currency_name)
+
 
 def get_currency_icon(currency_name):
     icons = {
@@ -162,6 +174,6 @@ def get_currency_icon(currency_name):
         "yuan": "💴",
         "bitcoin": "₿",
         "linganguliguli": "🦁",
-        "TUNG TUNG SAHUR": "🪵"
+        "TUNG TUNG SAHUR": "🪵",
     }
     return icons.get(currency_name, "💰")

@@ -1,83 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ChibiChange</title>
-    <style>
-        /* Верхняя панель */
-        .top-bar {
-            background-color: #f1f1f1; /* Цвет фона панели */
-            padding: 10px 20px; /* Отступы панели */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Линия тени */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* Контейнер для правой части панели */
-        .top-bar-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* Круглая иконка */
-        .user-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px;  /* Ширина иконки */
-            height: 45px; /* Высота иконки */
-            border-radius: 50%;  /* Круглая форма */
-            background-color: #b0b0b0;  /* Цвет фона иконки */
-            color: rgb(0, 0, 0);  /* Цвет текста */
-            font-size: 25px;  /* Размер шрифта */
-            font-weight: bold;  /* Жирный шрифт */
-            text-align: center;
-            line-height: 45px; /* Центрирование буквы */
-        }
-
-        a {
-            text-decoration: none;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-
-    <!-- Верхняя панель с названием сайта и логином/именем -->
-    <div class="top-bar">
-        <!-- Название сайта -->
-        <h1><a href="{{ url_for('home') }}" style="text-decoration: none; color: black;">ChibiChange</a></h1>
-
-        <!-- Контейнер для правой части панели -->
-        <div class="top-bar-right">
-                <!-- Круглая иконка с первой буквой имени -->
+    <div class="header">
+        <div class="header-logo">
+            <a href="{{ url_for('home')}}"><img src="{{ url_for('static', filename='Chibichange.png') }}" alt="ChibiChange"></a>
+        </div>
+        <!-- <div class="header-tyan">
+            <img src="{{ url_for('static', filename='reg.gif') }}" alt="gifka" class="head-gif">
+        </div> -->
+        <div class="header-reg">
                 <a href="{{ url_for('profile') }}" title="Profile">
                     <div class="user-icon" style="margin-right: 5px">{{ current_user.username[0] }}</div>
                 </a>
-                <!-- Иконка выхода -->
                 <a href="{{ url_for('logout') }}" title="Logout">
                     <img src="{{ url_for('static', filename='logout-icon.png') }}" alt="Logout" width="35" height="40" style="margin-right: 5px; margin-top: 5px;">
                 </a>
         </div>
     </div>
 
-    <!-- Уведомления по email -->
-    <div>
+    <div class="container">
+        <div class="container-form">
         <p>Would you like to receive notifications via email?</p>
-        <input type="checkbox" id="email-notifications" name="email-notifications" disabled>
-        <label for="email-notifications">Yes, send me email notifications</label>
+        <br>
+        <div class="checkbox-container">
+            <input type="checkbox" id="email-notifications" name="email-notifications">
+            <label for="email-notifications">Yes, send me email notifications</label>
+        </div>
+        <a href="{{ url_for('change_password') }}" class="button-link">
+            <button type="button">Change Password</button>
+        </a>
+        <ul>
+            {% for item in currencies %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+        </div>
     </div>
-
-       <!-- Кнопка-ссылка для перехода на страницу смены пароля -->
-    <a href="{{ url_for('change_password') }}" class="button-link">
-        <button type="button" style="margin-left: 20px; margin-top: 20px;">Change Password</button>
-    </a>
-
-    <ul>
-        {% for item in currencies %}
-            <li>{{ item }}</li>
-        {% endfor %}
-    </ul>
-
+    <div class="footer">
+        <p>ChibiChange.org</p>
+        <p>ChibiChangeHelp@gmail.com</p>
+    </div>
 </body>
 </html>

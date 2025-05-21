@@ -1,195 +1,177 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChibiChange</title>
-    <style>
-        /* Верхняя панель */
-        .top-bar {
-            background-color: #f1f1f1; /* Цвет фона панели */
-            padding: 10px 20px; /* Отступы панели */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Линия тени */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* Контейнер для правой части панели */
-        .top-bar-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* Круглая иконка */
-        .user-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px;  /* Ширина иконки */
-            height: 45px; /* Высота иконки */
-            border-radius: 50%;  /* Круглая форма */
-            background-color: #b0b0b0;  /* Цвет фона иконки */
-            color: rgb(0, 0, 0);  /* Цвет текста */
-            font-size: 25px;  /* Размер шрифта */
-            font-weight: bold;  /* Жирный шрифт */
-            text-align: center;
-            line-height: 45px; /* Центрирование буквы */
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        /* Основной контейнер для центрирования содержимого */
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 30px;
-        }
-        
-        /* Контейнер для карточек */
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 55px;
-            width: 70%;
-            max-width: 1200px;
-        }
-        
-        /* Стили для карточек */
-        .card {
-            background-color: #f8f9fa;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: inherit;
-            padding: 20px;
-            height: 500px;
-            width: 100%;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-            background-color: #e9ecef;
-        }
-        
-        /* Заголовок карточки с названием и изменением цены */
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .card-title {
-            font-size: 22px;
-            font-weight: bold;
-        }
-        
-        /* Стиль для изменения цены */
-        .change {
-            font-size: 16px;
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-        
-        /* Положительное изменение */
-        .change.positive {
-            background-color: #d4edda;
-            color: #155724;
-        }
-        
-        /* Отрицательное изменение */
-        .change.negative {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-        
-        /* Контейнер для графика */
-        .chart-placeholder {
-            height: 300px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 80px;
-            background-color: #e9ecef;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        
-        /* Стиль для цены */
-        .price {
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
-    <!-- Верхняя панель с названием сайта и логином/именем -->
-    <div class="top-bar">
-        <!-- Название сайта -->
-        <h1><a href="{{ url_for('home') }}" style="text-decoration: none; color: black;">ChibiChange</a></h1>
-
-        <!-- Контейнер для правой части панели -->
-        <div class="top-bar-right">
+    <div class="header">
+        <div class="header-logo">
+            <a href="{{ url_for('home')}}"><img src="{{ url_for('static', filename='Chibichange.png') }}" alt="ChibiChange"></a>
+        </div>
+        <div class="header-tyan">
+            <img src="{{ url_for('static', filename='reg.gif') }}" alt="gifka" class="head-gif">
+        </div>
+        <div class="header-reg">
             {% if current_user.is_authenticated %}
-                <!-- Круглая иконка с первой буквой имени -->
                 <a href="{{ url_for('profile') }}" title="Profile">
                     <div class="user-icon">{{ current_user.username[0] }}</div>
                 </a>
-                <!-- Иконка настроек -->
                 <a href="{{ url_for('settings') }}" title="Settings">
                     <img src="{{ url_for('static', filename='settings-icon.png') }}" alt="Settings" width="45" height="45" style="margin-left: 0px; margin-top: 5px;">
                 </a>
             {% else %}
-                <!-- Кнопка входа -->
-                <a href="{{ url_for('login') }}" style="text-decoration: none; color: black; font-size: 22px; padding: 6px 12px; border: 3px solid black; border-radius: 5px;">
-                    Login
-                </a>
-                <!-- Кнопка регистрации -->
-                <a href="{{ url_for('register') }}" style="text-decoration: none; color: black; font-size: 22px; padding: 6px 12px; border: 3px solid black; border-radius: 5px;">
-                    Register
-                </a>
+                <a class="pressable-text" href="{{ url_for('login')}}">
+                    <h2>Login</h2>
+                </a>  
+                <a class="pressable-text" href="{{ url_for('register')}}">
+                    <h3>Register</h3>
+                </a>  
             {% endif %}
         </div>
+
     </div>
 
-    <!-- Основное содержимое страницы -->
-    <div class="main-content">
-        <!-- Заголовок раздела -->
-        <h2 style="text-align: center; width: 80%; margin-bottom: 30px;">Available Currencies</h2>
-        
-        <!-- Контейнер с карточками валют -->
-        <div class="cards-container">
-            {% for currency in currencies %}
-                <!-- Карточка валюты -->
-                <a href="{{ url_for('currency_detail', currency_name=currency.name) }}" class="card">
-                    <!-- Заголовок карточки с названием и изменением цены -->
-                    <div class="card-header">
-                        <div class="card-title">{{ currency.name|upper }}</div>
-                        <div class="change {% if currency.change.startswith('+') %}positive{% else %}negative{% endif %}">
-                            {{ currency.change }}
-                        </div>
-                    </div>
-                    
-                    <!-- График (заглушка) -->
-                    <div class="chart-placeholder">{{ currency.icon }}</div>
-                    
-                    <!-- Цена -->
-                    <div class="price">{{ currency.price }}</div>
-                </a>
-            {% endfor %}
-        </div>
+    <div class="main">
+        <a href="{{ url_for('currency_detail', currency_name = currencies[0].name) }}">
+            <div class="card">
+                <h1>BTC</h1>
+                <br>
+                <div class="change {% if currencies[0].change.startswith('+') %}positive{% else %}negative{% endif %}">
+                    <h3>{{ currencies[0].change }}</h3>
+                </div>
+                <img src="{{ url_for('static', filename='BTS-USDT.png') }}" alt="Graph" class="dbpictures">
+                <h3> {{ currencies[0].price}} USD</h3>
+            </div>
+        </a>
+        <a href="{{ url_for('currency_detail', currency_name = currencies[1].name) }}">
+            <div class="card">
+                <h1>ETH</h1>
+                <br>
+                <div class="change {% if currencies[1].change.startswith('+') %}positive{% else %}negative{% endif %}">
+                    <h3>{{ currencies[1].change }}</h3>
+                </div>
+                <img src="{{ url_for('static', filename='BTS-USDT.png') }}" alt="Graph" class="dbpictures">
+                <h3> {{ currencies[1].price}} USD</h3>
+            </div>
+        </a>
+        <a href="{{ url_for('currency_detail', currency_name = currencies[2].name) }}">
+            <div class="card">
+                <h1>BNB</h1>
+                <br>
+                <div class="change {% if currencies[2].change.startswith('+') %}positive{% else %}negative{% endif %}">
+                   <h3>{{ currencies[2].change }}</h3>
+                </div>
+                <img src="{{ url_for('static', filename='BTS-USDT.png') }}" alt="Graph" class="dbpictures">
+                <h3> {{ currencies[2].price}} USD</h3>
+            </div>
+        </a>
+        <a href="{{ url_for('currency_detail', currency_name = currencies[3].name) }}">
+            <div class="card">
+                <h1>XRP</h1>
+                <br>
+                <div class="change {% if currencies[3].change.startswith('+') %}positive{% else %}negative{% endif %}">
+                   <h3>{{ currencies[3].change }}</h3>
+                </div>
+                <img src="{{ url_for('static', filename='BTS-USDT.png') }}" alt="Graph" class="dbpictures">
+                <h3> {{ currencies[3].price}} USD</h3>
+            </div>
+        </a>
+        <a href="{{ url_for('currency_detail', currency_name = currencies[4].name) }}">
+            <div class="card">
+                <h1>SOL</h1>
+                <br>
+                <div class="change {% if currencies[4].change.startswith('+') %}positive{% else %}negative{% endif %}">
+                   <h3>{{ currencies[4].change }}</h3>
+                </div>
+                <img src="{{ url_for('static', filename='BTS-USDT.png') }}" alt="Graph" class="dbpictures">
+                <h3> {{ currencies[4].price}} USD</h3>
+            </div>
+        </a>
+        <a href="{{ url_for('currency_detail', currency_name = currencies[5].name) }}">
+            <div class="card">
+                <h1>ADA</h1>
+                <br>
+                <div class="change {% if currencies[5].change.startswith('+') %}positive{% else %}negative{% endif %}">
+                   <h3>{{ currencies[5].change }}</h3>
+                </div>
+                <img src="{{ url_for('static', filename='BTS-USDT.png') }}" alt="Graph" class="dbpictures">
+                <h3> {{ currencies[5].price}} USD</h3>
+            </div>
+        </a>
+        <a href="{{ url_for('currency_detail', currency_name = currencies[6].name) }}">
+            <div class="card">
+                <h1>DOGE</h1>
+                <br>
+                <div class="change {% if currencies[6].change.startswith('+') %}positive{% else %}negative{% endif %}">
+                   <h3>{{ currencies[6].change }}</h3>
+                </div>
+                <img src="{{ url_for('static', filename='BTS-USDT.png') }}" alt="Graph" class="dbpictures">
+                <h3> {{ currencies[6].price}} USD</h3>
+            </div>
+        </a>
+        <a href="{{ url_for('currency_detail', currency_name = currencies[7].name) }}">
+            <div class="card">
+                <h1>DOT</h1>
+                <br>
+                <div class="change {% if currencies[7].change.startswith('+') %}positive{% else %}negative{% endif %}">
+                   <h3>{{ currencies[7].change }}</h3>
+                </div>
+                <img src="{{ url_for('static', filename='BTS-USDT.png') }}" alt="Graph" class="dbpictures">
+                <h3> {{ currencies[7].price}} USD</h3>
+            </div>
+        </a>
+        <a href="{{ url_for('currency_detail', currency_name = currencies[8].name) }}">
+            <div class="card">
+                <h1>EUR</h1>
+                <br>
+                <div class="change {% if currencies[8].change.startswith('+') %}positive{% else %}negative{% endif %}">
+                   <h3>{{ currencies[8].change }}</h3>
+                </div>
+                <img src="{{ url_for('static', filename='BTS-USDT.png') }}" alt="Graph" class="dbpictures">
+                <h3> {{ currencies[8].price}} USD</h3>
+            </div>
+        </a>
+        <a href="{{ url_for('currency_detail', currency_name = currencies[9].name) }}">
+            <div class="card">
+                <h1>CNY</h1>
+                <br>
+                <div class="change {% if currencies[9].change.startswith('+') %}positive{% else %}negative{% endif %}">
+                   <h3>{{ currencies[9].change }}</h3>
+                </div>
+                <img src="{{ url_for('static', filename='BTS-USDT.png') }}" alt="Graph" class="dbpictures">
+                <h3> {{ currencies[9].price}} USD</h3>
+            </div>
+        </a>
+        <a href="{{ url_for('currency_detail', currency_name = currencies[10].name) }}">
+            <div class="card">
+                <h1>DAI</h1>
+                <br>
+                <div class="change {% if currencies[10].change.startswith('+') %}positive{% else %}negative{% endif %}">
+                   <h3>{{ currencies[10].change }}</h3>
+                </div>
+                <img src="{{ url_for('static', filename='BTS-USDT.png') }}" alt="Graph" class="dbpictures">
+                <h3> {{ currencies[10].price}} USD</h3>
+            </div>
+        </a>
+        <a href="{{ url_for('currency_detail', currency_name = currencies[11].name) }}">
+            <div class="card">
+                <h1>FDUSD</h1>
+                <br>
+                <div class="change {% if currencies[11].change.startswith('+') %}positive{% else %}negative{% endif %}">
+                   <h3>{{ currencies[11].change }}</h3>
+                </div>
+                <img src="{{ url_for('static', filename='BTS-USDT.png') }}" alt="Graph" class="dbpictures">
+                <h3> {{ currencies[11].price}} USD</h3>
+            </div>
+        </a>
+    </div>
+    <div class="footer">
+        <p>ChibiChange.org</p>
+        <p>ChibiChangeHelp@gmail.com</p>
     </div>
 </body>
 </html>

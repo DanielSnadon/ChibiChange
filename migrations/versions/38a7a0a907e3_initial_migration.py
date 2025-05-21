@@ -1,8 +1,8 @@
-"""Add CurrencyPrice model
+"""Initial migration
 
-Revision ID: 4d1508ae2daa
+Revision ID: 38a7a0a907e3
 Revises: 
-Create Date: 2025-04-20 18:47:50.354483
+Create Date: 2025-05-19 11:16:44.753588
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '4d1508ae2daa'
+revision = '38a7a0a907e3'
 down_revision = None
 branch_labels = None
 depends_on = None
