@@ -155,7 +155,7 @@
                     <h3>{{ currencies.get('PEPE', {}).get('percent', 0) }}%</h3>
                 </div>
                 <img src="{{ url_for('static', filename='PEPE-USDT-1d-small.png') }}" alt="Graph" class="dbpictures">
-                <h3>{{ currencies.get('PEPE', {}).get('price', 0) }} USD</h3>
+                <h3>{{ "%.8f"|format(currencies.get('PEPE', {}).get('price', 0)|float) }} USD</h3>
             </div>
         </a>
         <a href="{{ url_for('currency_detail', currency_name='LTC') }}">

@@ -40,5 +40,46 @@
             <img src="{{ url_for('static', filename=currency_name + '-USDT-1d-big.png') }}" alt="Graph">
         </div>
     </div>
+
+    <form id="buyForm" action="{{ url_for('buy_currency') }}" method="POST">
+        <input type="hidden" name="currency" value="{{ currency_name }}">
+        <h2>Buy {{ currency_name|upper }}</h2>
+        <div class="form-group">
+            <label for="buyAmount">Amount (USD):</label>
+            <input type="number" name="amount" min="0.01" step="0.01" placeholder="Enter amount" required>
+        </div>
+        <button type="submit" class="btn btn-green">Confirm Buy</button>
+        {% if buy_error %}
+        <div class="error-message">{{ buy_error }}</div>
+        {% endif %}
+    </form>
+
+    <form id="sellForm" action="{{ url_for('sell_currency') }}" method="POST">
+        <input type="hidden" name="currency" value="{{ currency_name }}">
+        <h2>Sell {{ currency_name|upper }}</h2>
+        <div class="form-group">
+            <label for="sellAmount">Amount ({{ currency_name|upper }}):</label>
+            <input type="number" 
+                id="sellAmount" 
+                name="amount" 
+                min="0.00000001" 
+                step="0.00000001" 
+                placeholder="Enter amount"
+                required>
+        </div>
+        <button type="submit" class="btn btn-red">Confirm Sell</button>
+        {% if sell_error %}
+        <div class="error-message">{{ sell_error }}</div>
+        {% endif %}
+    </form>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
 </body>
 </html>
