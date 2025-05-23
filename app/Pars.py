@@ -27,111 +27,111 @@ def parser_start():
         engine = create_engine('sqlite:///prices.db')
 
         btc1 = GetData(what="BTC", interval="1m", count=60)
-        btc2 = GetData(what="BTC", interval="1m", count=960)
+        btc2 = GetData(what="BTC", interval="3m", count=480)
         btc3 = GetData(what="BTC", interval="1h", count=720)
         btc4 = GetData(what="BTC", interval="1d", count=360)
 
         eth1 = GetData(what="ETH", interval="1m", count=60)
-        eth2 = GetData(what="ETH", interval="1m", count=960)
+        eth2 = GetData(what="ETH", interval="3m", count=480)
         eth3 = GetData(what="ETH", interval="1h", count=720)
         eth4 = GetData(what="ETH", interval="1d", count=360)
 
         bnb1 = GetData(what="BNB", interval="1m", count=60)
-        bnb2 = GetData(what="BNB", interval="1m", count=960)
+        bnb2 = GetData(what="BNB", interval="3m", count=480)
         bnb3 = GetData(what="BNB", interval="1h", count=720)
         bnb4 = GetData(what="BNB", interval="1d", count=360)
 
         xrp1 = GetData(what="XRP", interval="1m", count=60)
-        xrp2 = GetData(what="XRP", interval="1m", count=960)
+        xrp2 = GetData(what="XRP", interval="3m", count=480)
         xrp3 = GetData(what="XRP", interval="1h", count=720)
         xrp4 = GetData(what="XRP", interval="1d", count=360)
 
         sol1 = GetData(what="SOL", interval="1m", count=60)
-        sol2 = GetData(what="SOL", interval="1m", count=960)
+        sol2 = GetData(what="SOL", interval="3m", count=480)
         sol3 = GetData(what="SOL", interval="1h", count=720)
         sol4 = GetData(what="SOL", interval="1d", count=360)
 
         ada1 = GetData(what="ADA", interval="1m", count=60)
-        ada2 = GetData(what="ADA", interval="1m", count=960)
+        ada2 = GetData(what="ADA", interval="3m", count=480)
         ada3 = GetData(what="ADA", interval="1h", count=720)
         ada4 = GetData(what="ADA", interval="1d", count=360)
 
         doge1 = GetData(what="DOGE", interval="1m", count=60)
-        doge2 = GetData(what="DOGE", interval="1m", count=960)
+        doge2 = GetData(what="DOGE", interval="3m", count=480)
         doge3 = GetData(what="DOGE", interval="1h", count=720)
         doge4 = GetData(what="DOGE", interval="1d", count=360)
 
         dot1 = GetData(what="DOT", interval="1m", count=60)
-        dot2 = GetData(what="DOT", interval="1m", count=960)
+        dot2 = GetData(what="DOT", interval="3m", count=480)
         dot3 = GetData(what="DOT", interval="1h", count=720)
         dot4 = GetData(what="DOT", interval="1d", count=360)
 
         eur1 = GetData(what="EUR", interval="1m", count=60)
-        eur2 = GetData(what="EUR", interval="1m", count=960)
+        eur2 = GetData(what="EUR", interval="3m", count=480)
         eur3 = GetData(what="EUR", interval="1h", count=720)
         eur4 = GetData(what="EUR", interval="1d", count=360)
 
         amp1 = GetData(what="AMP", interval="1m", count=60)
-        amp2 = GetData(what="AMP", interval="1m", count=960)
+        amp2 = GetData(what="AMP", interval="3m", count=480)
         amp3 = GetData(what="AMP", interval="1h", count=720)
         amp4 = GetData(what="AMP", interval="1d", count=360)
 
         pepe1 = GetData(what="PEPE", interval="1m", count=60)
-        pepe2 = GetData(what="PEPE", interval="1m", count=960)
+        pepe2 = GetData(what="PEPE", interval="3m", count=480)
         pepe3 = GetData(what="PEPE", interval="1h", count=720)
         pepe4 = GetData(what="PEPE", interval="1d", count=360)
 
         ltc1 = GetData(what="LTC", interval="1m", count=60)
-        ltc2 = GetData(what="LTC", interval="1m", count=960)
+        ltc2 = GetData(what="LTC", interval="3m", count=480)
         ltc3 = GetData(what="LTC", interval="1h", count=720)
         ltc4 = GetData(what="LTC", interval="1d", count=360)
 
-        btc2 = [btc2[date] for date in range(len(btc2)) if (date + 1) % 16 == 0]
+        btc2 = [btc2[date] for date in range(len(btc2)) if (date + 1) % 24 == 0]
         btc3 = [btc3[date] for date in range(len(btc3)) if (date + 1) % 12 == 0]
         btc4 = [btc4[date] for date in range(len(btc4)) if (date + 1) % 6 == 0]
 
 
-        eth2 = [eth2[date] for date in range(len(eth2)) if (date + 1) % 16 == 0]
+        eth2 = [eth2[date] for date in range(len(eth2)) if (date + 1) % 24 == 0]
         eth3 = [eth3[date] for date in range(len(eth3)) if (date + 1) % 12 == 0]
         eth4 = [eth4[date] for date in range(len(eth4)) if (date + 1) % 6 == 0]
 
-        bnb2 = [bnb2[date] for date in range(len(bnb2)) if (date + 1) % 16 == 0]
+        bnb2 = [bnb2[date] for date in range(len(bnb2)) if (date + 1) % 24 == 0]
         bnb3 = [bnb3[date] for date in range(len(bnb3)) if (date + 1) % 12 == 0]
         bnb4 = [bnb4[date] for date in range(len(bnb4)) if (date + 1) % 6 == 0]
 
-        xrp2 = [xrp2[date] for date in range(len(xrp2)) if (date + 1) % 16 == 0]
+        xrp2 = [xrp2[date] for date in range(len(xrp2)) if (date + 1) % 24 == 0]
         xrp3 = [xrp3[date] for date in range(len(xrp3)) if (date + 1) % 12 == 0]
         xrp4 = [xrp4[date] for date in range(len(xrp4)) if (date + 1) % 6 == 0]
 
-        sol2 = [sol2[date] for date in range(len(sol2)) if (date + 1) % 16 == 0]
+        sol2 = [sol2[date] for date in range(len(sol2)) if (date + 1) % 24 == 0]
         sol3 = [sol3[date] for date in range(len(sol3)) if (date + 1) % 12 == 0]
         sol4 = [sol4[date] for date in range(len(sol4)) if (date + 1) % 6 == 0]
 
-        ada2 = [ada2[date] for date in range(len(ada2)) if (date + 1) % 16 == 0]
+        ada2 = [ada2[date] for date in range(len(ada2)) if (date + 1) % 24 == 0]
         ada3 = [ada3[date] for date in range(len(ada3)) if (date + 1) % 12 == 0]
         ada4 = [ada4[date] for date in range(len(ada4)) if (date + 1) % 6 == 0]
 
-        doge2 = [doge2[date] for date in range(len(doge2)) if (date + 1) % 16 == 0]
+        doge2 = [doge2[date] for date in range(len(doge2)) if (date + 1) % 24 == 0]
         doge3 = [doge3[date] for date in range(len(doge3)) if (date + 1) % 12 == 0]
         doge4 = [doge4[date] for date in range(len(doge4)) if (date + 1) % 6 == 0]
 
-        dot2 = [dot2[date] for date in range(len(dot2)) if (date + 1) % 16 == 0]
+        dot2 = [dot2[date] for date in range(len(dot2)) if (date + 1) % 24 == 0]
         dot3 = [dot3[date] for date in range(len(dot3)) if (date + 1) % 12 == 0]
         dot4 = [dot4[date] for date in range(len(dot4)) if (date + 1) % 6 == 0]
 
-        eur2 = [eur2[date] for date in range(len(eur2)) if (date + 1) % 16 == 0]
+        eur2 = [eur2[date] for date in range(len(eur2)) if (date + 1) % 24 == 0]
         eur3 = [eur3[date] for date in range(len(eur3)) if (date + 1) % 12 == 0]
         eur4 = [eur4[date] for date in range(len(eur4)) if (date + 1) % 6 == 0]
 
-        amp2 = [amp2[date] for date in range(len(amp2)) if (date + 1) % 16 == 0]
+        amp2 = [amp2[date] for date in range(len(amp2)) if (date + 1) % 24 == 0]
         amp3 = [amp3[date] for date in range(len(amp3)) if (date + 1) % 12 == 0]
         amp4 = [amp4[date] for date in range(len(amp4)) if (date + 1) % 6 == 0]
 
-        pepe2 = [pepe2[date] for date in range(len(pepe2)) if (date + 1) % 16 == 0]
+        pepe2 = [pepe2[date] for date in range(len(pepe2)) if (date + 1) % 24 == 0]
         pepe3 = [pepe3[date] for date in range(len(pepe3)) if (date + 1) % 12 == 0]
         pepe4 = [pepe4[date] for date in range(len(pepe4)) if (date + 1) % 6 == 0]
 
-        ltc2 = [ltc2[date] for date in range(len(ltc2)) if (date + 1) % 16 == 0]
+        ltc2 = [ltc2[date] for date in range(len(ltc2)) if (date + 1) % 24 == 0]
         ltc3 = [ltc3[date] for date in range(len(ltc3)) if (date + 1) % 12 == 0]
         ltc4 = [ltc4[date] for date in range(len(ltc4)) if (date + 1) % 6 == 0]
         
