@@ -32,11 +32,17 @@ a {
     font-weight: bold;
     text-align: center;
     line-height: 45px;
-    border-color: #B68933;
+    /* border-color: #B68933; */
     border: 4px solid #B68933;
     font-family: "Pixelify Sans";
 }
 
+.Logout {
+    margin-right: 5px; 
+    margin-top: 5px; 
+    border: 4px solid #B68933; 
+    border-radius: 20%; background-color: #e2bf62;
+}
 .change.positive {
     color: #29a749;
 }
