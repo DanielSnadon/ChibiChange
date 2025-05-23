@@ -1,5 +1,7 @@
 from app import create_app
-from app.parser import update_prices
+from app.Pars import parser_start
+from app.GrapgBigBuilder import big_graph
+from app.GraphBuilder import graph
 from threading import Thread
 import time
 from flask import Flask
@@ -15,8 +17,10 @@ def price_updater():
     """Фоновая задача для обновления цен"""
     while True:
         with app.app_context():
-            update_prices()
-        time.sleep(10)  # Интервал 5 минут
+            parser_start()
+            time.sleep(10)  # Интервал 5 минут
+            graph()
+            big_graph()
 
 
 if __name__ == "__main__":

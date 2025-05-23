@@ -6,7 +6,6 @@ from app.forms import RegistrationForm, LoginForm, ChangePasswordForm
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.models import CurrencyPrice  # Новая модель для хранения цен
-from .parser import current_prices
 
 
 def register_routes(app):
