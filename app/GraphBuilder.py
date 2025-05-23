@@ -47,7 +47,7 @@ def graph():
                 )
 
             filename = f'{currency.replace("/", "-")}-small.png'
-            save_path = os.path.join('static', filename)
+            save_path = os.path.join('app/static', filename)
             fig.savefig(
                 save_path,
                 dpi=100,

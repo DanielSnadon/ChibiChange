@@ -50,7 +50,7 @@ def big_graph():
             ax.grid(True, color='#333333', linestyle='--', alpha=0.5)
             
             filename = f'{currency.replace("/", "-")}-big.png'
-            save_path = os.path.join('static', filename)
+            save_path = os.path.join('app/static', filename)
             fig.savefig(
                 save_path,
                 dpi=100,

@@ -4,6 +4,8 @@ import os
 import requests as rq
 from datetime import datetime
 from app import db
+from app import db
+from app.models import CurrencyPrice
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 INSTANCE_DIR = os.path.join(BASE_DIR, 'instance')
@@ -198,6 +200,59 @@ def parser_start():
 
         toaster.to_sql(name='table', con=engine, if_exists='replace')
         print("Цены обновлены")
+
+        new_price = [CurrencyPrice(
+            currency_name="BTC",
+            price=float(btc2[-1]),
+            percent=(f'{((float(btc2[-1]) - float(btc2[0]))/float(btc2[0])) * 100:.2f}')
+        ), CurrencyPrice(
+            currency_name="ETH",
+            price=float(eth2[-1]),
+            percent=float(f'{((float(eth2[-1]) - float(eth2[0]))/float(eth2[0])) * 100:.2f}')
+        ),CurrencyPrice(
+            currency_name="BNB",
+            price=float(bnb2[-1]),
+            percent=float(f'{((float(bnb2[-1]) - float(bnb2[0]))/float(bnb2[0])) * 100:.2f}')
+        ),CurrencyPrice(
+            currency_name="XRP",
+            price=float(xrp2[-1]),
+            percent=float(f'{((float(xrp2[-1]) - float(xrp2[0]))/float(xrp2[0])) * 100:.2f}')
+        ),CurrencyPrice(
+            currency_name="SOL",
+            price=float(sol2[-1]),
+            percent=float(f'{((float(sol2[-1]) - float(sol2[0]))/float(sol2[0])) * 100:.2f}')
+        ),CurrencyPrice(
+            currency_name="ADA",
+            price=float(ada2[-1]),
+            percent=float(f'{((float(ada2[-1]) - float(ada2[0]))/float(ada2[0])) * 100:.2f}')
+        ),CurrencyPrice(
+            currency_name="DOGE",
+            price=float(doge2[-1]),
+            percent=float(f'{((float(doge2[-1]) - float(doge2[0]))/float(doge2[0])) * 100:.2f}')
+        ),CurrencyPrice(
+            currency_name="DOT",
+            price=float(dot2[-1]),
+            percent=float(f'{((float(dot2[-1]) - float(dot2[0]))/float(dot2[0])) * 100:.2f}')
+        ),CurrencyPrice(
+            currency_name="EUR",
+            price=float(eur2[-1]),
+            percent=float(f'{((float(eur2[-1]) - float(eur2[0]))/float(eur2[0])) * 100:.2f}')
+        ),CurrencyPrice(
+            currency_name="AMP",
+            price=float(amp2[-1]),
+            percent=float(f'{((float(amp2[-1]) - float(amp2[0]))/float(amp2[0])) * 100:.2f}')
+        ),CurrencyPrice(
+            currency_name="PEPE",
+            price=float(pepe2[-1]),
+            percent=float(f'{((float(pepe2[-1]) - float(pepe2[0]))/float(pepe2[0])) * 100:.2f}')
+        ),CurrencyPrice(
+            currency_name="LTC",
+            price=float(ltc2[-1]),
+            percent=float(f'{((float(ltc2[-1]) - float(ltc2[0]))/float(ltc2[0])) * 100:.2f}')
+        ),]
+        
+        db.session.add_all(new_price)
+        db.session.commit()
 
     except Exception as e:
         print(f"Ошибка: {e}")

@@ -5,6 +5,7 @@ from app.GraphBuilder import graph
 from threading import Thread
 import time
 from flask import Flask
+from app import db
 
 app = create_app()
 
@@ -14,13 +15,17 @@ register_routes(app)
 
 
 def price_updater():
-    """Фоновая задача для обновления цен"""
     while True:
         with app.app_context():
-            parser_start()
-            time.sleep(10)  # Интервал 5 минут
-            graph()
-            big_graph()
+            try:
+                parser_start()
+                graph()
+                big_graph()
+                db.session.commit()
+            except Exception as e:
+                db.session.rollback()
+                print(f"Error in price_updater: {e}")
+            time.sleep(10)
 
 
 if __name__ == "__main__":

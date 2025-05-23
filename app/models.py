@@ -19,4 +19,5 @@ class CurrencyPrice(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     currency_name = db.Column(db.String(50), nullable=False)
     price = db.Column(db.Float, nullable=False)
+    percent = db.Column(db.Float, nullable=False)
     timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
