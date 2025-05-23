@@ -88,52 +88,52 @@ def parser_start():
         ltc3 = GetData(what="LTC", interval="1h", count=720)
         ltc4 = GetData(what="LTC", interval="1d", count=360)
 
-        btc2 = [btc2[date] for date in range(len(btc2)) if (date + 1) % 24 == 0]
+        btc2 = [btc2[date] for date in range(len(btc2)) if (date + 1) % 8 == 0]
         btc3 = [btc3[date] for date in range(len(btc3)) if (date + 1) % 12 == 0]
         btc4 = [btc4[date] for date in range(len(btc4)) if (date + 1) % 6 == 0]
 
 
-        eth2 = [eth2[date] for date in range(len(eth2)) if (date + 1) % 24 == 0]
+        eth2 = [eth2[date] for date in range(len(eth2)) if (date + 1) % 8 == 0]
         eth3 = [eth3[date] for date in range(len(eth3)) if (date + 1) % 12 == 0]
         eth4 = [eth4[date] for date in range(len(eth4)) if (date + 1) % 6 == 0]
 
-        bnb2 = [bnb2[date] for date in range(len(bnb2)) if (date + 1) % 24 == 0]
+        bnb2 = [bnb2[date] for date in range(len(bnb2)) if (date + 1) % 8 == 0]
         bnb3 = [bnb3[date] for date in range(len(bnb3)) if (date + 1) % 12 == 0]
         bnb4 = [bnb4[date] for date in range(len(bnb4)) if (date + 1) % 6 == 0]
 
-        xrp2 = [xrp2[date] for date in range(len(xrp2)) if (date + 1) % 24 == 0]
+        xrp2 = [xrp2[date] for date in range(len(xrp2)) if (date + 1) % 8 == 0]
         xrp3 = [xrp3[date] for date in range(len(xrp3)) if (date + 1) % 12 == 0]
         xrp4 = [xrp4[date] for date in range(len(xrp4)) if (date + 1) % 6 == 0]
 
-        sol2 = [sol2[date] for date in range(len(sol2)) if (date + 1) % 24 == 0]
+        sol2 = [sol2[date] for date in range(len(sol2)) if (date + 1) % 8 == 0]
         sol3 = [sol3[date] for date in range(len(sol3)) if (date + 1) % 12 == 0]
         sol4 = [sol4[date] for date in range(len(sol4)) if (date + 1) % 6 == 0]
 
-        ada2 = [ada2[date] for date in range(len(ada2)) if (date + 1) % 24 == 0]
+        ada2 = [ada2[date] for date in range(len(ada2)) if (date + 1) % 8 == 0]
         ada3 = [ada3[date] for date in range(len(ada3)) if (date + 1) % 12 == 0]
         ada4 = [ada4[date] for date in range(len(ada4)) if (date + 1) % 6 == 0]
 
-        doge2 = [doge2[date] for date in range(len(doge2)) if (date + 1) % 24 == 0]
+        doge2 = [doge2[date] for date in range(len(doge2)) if (date + 1) % 8 == 0]
         doge3 = [doge3[date] for date in range(len(doge3)) if (date + 1) % 12 == 0]
         doge4 = [doge4[date] for date in range(len(doge4)) if (date + 1) % 6 == 0]
 
-        dot2 = [dot2[date] for date in range(len(dot2)) if (date + 1) % 24 == 0]
+        dot2 = [dot2[date] for date in range(len(dot2)) if (date + 1) % 8 == 0]
         dot3 = [dot3[date] for date in range(len(dot3)) if (date + 1) % 12 == 0]
         dot4 = [dot4[date] for date in range(len(dot4)) if (date + 1) % 6 == 0]
 
-        eur2 = [eur2[date] for date in range(len(eur2)) if (date + 1) % 24 == 0]
+        eur2 = [eur2[date] for date in range(len(eur2)) if (date + 1) % 8 == 0]
         eur3 = [eur3[date] for date in range(len(eur3)) if (date + 1) % 12 == 0]
         eur4 = [eur4[date] for date in range(len(eur4)) if (date + 1) % 6 == 0]
 
-        amp2 = [amp2[date] for date in range(len(amp2)) if (date + 1) % 24 == 0]
+        amp2 = [amp2[date] for date in range(len(amp2)) if (date + 1) % 8 == 0]
         amp3 = [amp3[date] for date in range(len(amp3)) if (date + 1) % 12 == 0]
         amp4 = [amp4[date] for date in range(len(amp4)) if (date + 1) % 6 == 0]
 
-        pepe2 = [pepe2[date] for date in range(len(pepe2)) if (date + 1) % 24 == 0]
+        pepe2 = [pepe2[date] for date in range(len(pepe2)) if (date + 1) % 8 == 0]
         pepe3 = [pepe3[date] for date in range(len(pepe3)) if (date + 1) % 12 == 0]
         pepe4 = [pepe4[date] for date in range(len(pepe4)) if (date + 1) % 6 == 0]
 
-        ltc2 = [ltc2[date] for date in range(len(ltc2)) if (date + 1) % 24 == 0]
+        ltc2 = [ltc2[date] for date in range(len(ltc2)) if (date + 1) % 8 == 0]
         ltc3 = [ltc3[date] for date in range(len(ltc3)) if (date + 1) % 12 == 0]
         ltc4 = [ltc4[date] for date in range(len(ltc4)) if (date + 1) % 6 == 0]
         
