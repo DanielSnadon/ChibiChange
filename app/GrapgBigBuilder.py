@@ -30,9 +30,7 @@ def big_graph():
             values = pd.to_numeric(data[currency].dropna().values)
 
             if len(values) != 60:
-                print(
-                    f"Warning: Number of points for {currency} is not 60 ({len(values)})."
-                )
+                print(f"Недостаточно точек.")
                 if len(values) < 2:
                     continue
 
@@ -91,12 +89,12 @@ def big_graph():
                     outliers_x,
                     outliers_y,
                     "o",
-                    color="#8B0000",
+                    color="#3003E6",
                     markersize=6,
                     label="Outliers",
                 )
 
-            ax.grid(True, color="#333333", linestyle="--", alpha=0.5)
+            ax.grid(True, color="#333333", linestyle="--", alpha=0.2)
             ax.legend(
                 loc="lower center",
                 facecolor="#2B2B2B",
@@ -124,6 +122,6 @@ def big_graph():
             plt.close(fig)
 
         except Exception as e:
-            print(f"Error processing {currency}: {e}")
+            print(f"Ошибка с {currency}: {e}.")
 
     print("Большие графики созданы.")
