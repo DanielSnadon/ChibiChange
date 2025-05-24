@@ -16,7 +16,7 @@ def big_graph():
     try:
         data = pd.read_sql_table("table", con=engine)
     except Exception as e:
-        print(f"Error reading from DB: {e}")
+        print(f"Ошибка при чтении из БД: {e}")
         return
 
     static_dir = "app/static"
@@ -30,8 +30,11 @@ def big_graph():
             values = pd.to_numeric(data[currency].dropna().values)
 
             if len(values) != 60:
-                print(f"Недостаточно точек.")
+                print(
+                    f"Предупреждение: Количество точек для {currency} не равно 60 ({len(values)})."
+                )
                 if len(values) < 2:
+                    print(f"Недостаточно данных для построения графика для {currency}.")
                     continue
 
             fig, ax = plt.subplots(figsize=(8, 4), dpi=100)
@@ -56,6 +59,38 @@ def big_graph():
                     outliers_x.append(x[i])
                     outliers_y.append(val)
 
+            min_val = np.min(values)
+            max_val = np.max(values)
+            value_range = max_val - min_val
+
+            decimal_places = 2
+
+            if value_range < 0.001 and value_range > 0:
+                decimal_places = 6
+            elif value_range < 0.01 and value_range > 0:
+                decimal_places = 5
+            elif value_range < 0.1 and value_range > 0:
+                decimal_places = 4
+            elif value_range < 1 and value_range > 0:
+                decimal_places = 3
+            elif value_range < 100:
+                decimal_places = 2
+            elif value_range < 1000:
+                decimal_places = 1
+            else:
+                decimal_places = 0
+
+            if max_val > 0 and max_val < 0.01:
+                if max_val < 0.0001:
+                    decimal_places = max(decimal_places, 6)
+                elif max_val < 0.001:
+                    decimal_places = max(decimal_places, 5)
+                elif max_val < 0.01:
+                    decimal_places = max(decimal_places, 4)
+
+            fstring_format = f".{decimal_places}f"
+            formatter_format = f"%.{decimal_places}f"
+
             for i in range(len(x) - 1):
                 color = "#50B33B" if diffs[i] >= 0 else "#FF3B3B"
                 ax.plot(
@@ -74,14 +109,14 @@ def big_graph():
                 color="#800080",
                 linestyle="--",
                 linewidth=1.5,
-                label=f"Median: {median_val:.2f}",
+                label=f"Median: {median_val:{fstring_format}}",
             )
             ax.axhline(
                 mean_val,
                 color="#FFFF00",
                 linestyle=":",
                 linewidth=1.5,
-                label=f"Mean: {mean_val:.2f}",
+                label=f"Mean: {mean_val:{fstring_format}}",
             )
 
             if outliers_x:
@@ -89,12 +124,12 @@ def big_graph():
                     outliers_x,
                     outliers_y,
                     "o",
-                    color="#3003E6",
+                    color="#0000FF",
                     markersize=6,
                     label="Outliers",
                 )
 
-            ax.grid(True, color="#333333", linestyle="--", alpha=0.2)
+            ax.grid(True, color="#333333", linestyle="--", alpha=0.5)
             ax.legend(
                 loc="lower center",
                 facecolor="#2B2B2B",
@@ -103,7 +138,8 @@ def big_graph():
             )
 
             ax.tick_params(axis="y", colors="white")
-            formatter = mticker.FormatStrFormatter("$%.2f")
+
+            formatter = mticker.FormatStrFormatter(f"${formatter_format}")
             ax.yaxis.set_major_formatter(formatter)
 
             ax.set_xticks([0, 10])
@@ -122,6 +158,6 @@ def big_graph():
             plt.close(fig)
 
         except Exception as e:
-            print(f"Ошибка с {currency}: {e}.")
+            print(f"Ошибка при обработке {currency}: {e}.")
 
-    print("Большие графики созданы.")
+    print("Все большие графики созданы.")
