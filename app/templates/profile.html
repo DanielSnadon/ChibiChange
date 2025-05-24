@@ -1,42 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-    <style>
-        /* Верхняя панель */
-        .top-bar {
-            background-color: #f1f1f1; /* Цвет фона панели */
-            padding: 10px 20px; /* Отступы панели */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Линия тени */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-
-    <!-- Верхняя панель с названием сайта и логином/именем -->
-    <div class="top-bar">
-        <!-- Название сайта -->
-        <h1><a href="{{ url_for('home') }}" style="text-decoration: none; color: black;">ChibiChange</a></h1>
-
-        <!-- Иконка настроек -->
-        <a href="{{ url_for('settings') }}" title="Settings">
-            <img src="{{ url_for('static', filename='settings-icon.png') }}" alt="Settings" width="45" height="45" style="margin-left: 0px; margin-top: 5px;">
-        </a>
+    <div class="header">
+        <div class="header-logo">
+            <a href="{{ url_for('home')}}"><img src="{{ url_for('static', filename='Chibichange.png') }}" alt="ChibiChange"></a>
+        </div>
+        <div class="header-tyan">
+            <img src="{{ url_for('static', filename='reg.gif') }}" alt="gifka" class="head-gif">
+        </div>
+        <div class="header-reg">
+                <a href="{{ url_for('settings') }}" title="Settings">
+                    <img src="{{ url_for('static', filename='settings-icon.gif') }}" alt="Settings" width="45" height="45" style="margin-left: 0px; margin-top: 5px;">
+                </a>
+        </div>
     </div>
+    <div class="container">
+        <div class="container-form">
+            <h2>Profile details:</h2>
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <div class="balance-section">
+                <p><strong>TOTAL BALANCE:</strong>
 
-    <h2>Profile details:</h2>
-    <p><strong>Username:</strong> {{ user.username }}</p>
-    <p><strong>Email:</strong> {{ user.email }}</p>
-    <p><strong>Balance:</strong> $134.243.253</p>
+                    {{ usd_balance + btc_balance + eth_balance + bnb_balance + xrp_balance + sol_balance + ada_balance + doge_balance + dot_balance + eur_balance + amp_balance + pepe_balance + ltc_balance }} USD
 
-    <ul>
-        {% for item in currencies %}
-            <li>{{ item }}</li>
-        {% endfor %}
-    </ul>
-
+                <p><strong>USD Balance:</strong>
+                    {{ usd_balance }} USD
+                </p>
+                <p><strong>BTC Balance:</strong>
+                    {{ "%.8f"|format(btc_amount|float) }} BTC ({{ btc_balance }} USD)
+                </p>
+                <p><strong>ETH Balance:</strong>
+                    {{ eth_amount }} ETH ({{ eth_balance }} USD)
+                </p>
+                <p><strong>BNB Balance:</strong>
+                    {{ bnb_amount }} BNB ({{ bnb_balance }} USD)
+                </p>
+                <p><strong>XRP Balance:</strong>
+                    {{ xrp_amount }} XRP ({{ xrp_balance }} USD)
+                </p>
+                <p><strong>SOL Balance:</strong>
+                    {{ sol_amount }} SOL ({{ sol_balance }} USD)
+                </p>
+                <p><strong>ADA Balance:</strong>
+                    {{ ada_amount }} ADA ({{ ada_balance }} USD)
+                </p>
+                <p><strong>DOGE Balance:</strong>
+                    {{ doge_amount }} DOGE ({{ doge_balance }} USD)
+                </p>
+                <p><strong>DOT Balance:</strong>
+                    {{ dot_amount }} DOT ({{ dot_balance }} USD)
+                </p>
+                <p><strong>EUR Balance:</strong>
+                    {{ eur_amount }} EUR ({{ eur_balance }} USD)
+                </p>
+                <p><strong>AMP Balance:</strong>
+                    {{ amp_amount }} AMP ({{ amp_balance }} USD)
+                </p>
+                <p><strong>PEPE Balance:</strong>
+                    {{ pepe_amount }} PEPE ({{ pepe_balance }} USD)
+                </p>
+                <p><strong>LTC Balance:</strong>
+                    {{ ltc_amount }} LTC ({{ ltc_balance }} USD)
+                </p>
+            </div>
+            <ul>
+                {% for item in currencies %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="footer">
+        <p>ChibiChange.org</p>
+        <p>ChibiChangeHelp@gmail.com</p>
+    </div>
 </body>
 </html>

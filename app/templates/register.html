@@ -1,49 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Register</title>
-    <style>
-        /* Верхняя панель */
-        .top-bar {
-            background-color: #f1f1f1; /* Цвет фона панели */
-            padding: 10px 20px; /* Отступы панели */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Линия тени */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
 
-    <!-- Верхняя панель с названием сайта -->
-    <div class="top-bar">
-        <!-- Название сайта -->
-        <h1><a href="{{ url_for('home') }}" style="text-decoration: none; color: black;">ChibiChange</a></h1>
+   <div class="header">
+        <div class="header-logo">
+            <a href="{{ url_for('home')}}"><img src="{{ url_for('static', filename='Chibichange.png') }}" alt="ChibiChange"></a>
+        </div>
     </div>
-    
-    <h2>Register</h2>
 
-    <!-- Выводим сообщения, переданные через flash -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
-            <p style="color: {{ 'red' if category == 'danger' else 'green' }}">{{ message }}</p>
-        {% endfor %}
-        {% set _ = session.pop('_flashes', None) %}
-    {% endif %}
-    {% endwith %}
-    
-    <form method="POST">
-        {{ form.hidden_tag() }}
-        <p>{{ form.username.label }} {{ form.username() }}</p>
-        <p>{{ form.email.label }} {{ form.email() }}</p>
-        <p>{{ form.password.label }} {{ form.password() }}</p>
-        <p>{{ form.confirm_password.label }} {{ form.confirm_password() }}</p>
-        <p>{{ form.submit() }}</p>
-    </form>
-
-    <a href="{{ url_for('login') }}">Already have an account? Login</a>
-
+    <div class="container">
+        <div class="container-form">
+            <h1>Login</h1>       
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <p>{{ form.username.label }} {{ form.username() }}</p>
+                </div>
+                <div class="form-group">
+                    <p>{{ form.email.label }} {{ form.email() }}</p>
+                </div>
+                <div class="form-group">
+                    <p>{{ form.password.label }} {{ form.password() }}</p>
+                </div>
+                <div class="form-group">
+                    <p>{{ form.confirm_password.label }} {{ form.confirm_password() }}</p>
+                </div>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <p style="color: {{ 'red' if category == 'danger' else 'green' }}">{{ message }}</p>
+                {% endfor %}
+                {% set _ = session.pop('_flashes', None) %}
+                {% endif %}
+                {% endwith %}
+                <button type="submit" class="button">Register</button>
+                <div class="login-link">
+                    Already have an account?<a href="{{ url_for('login') }}">Login</a>
+                </div>  
+        </div>
+        </form>
+    </div>
+    <div class="footer">
+        <p>ChibiChange.org</p>
+        <p>ChibiChangeHelp@gmail.com</p>
+    </div>
 </body>
 </html>

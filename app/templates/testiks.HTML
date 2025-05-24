@@ -1,84 +1,180 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChibiChange</title>
-    <style>
-        /* Верхняя панель */
-        .top-bar {
-            background-color: #f1f1f1; /* Цвет фона панели */
-            padding: 10px 20px; /* Отступы панели */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Линия тени */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* Контейнер для правой части панели */
-        .top-bar-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* Круглая иконка */
-        .user-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px;  /* Ширина иконки */
-            height: 45px; /* Высота иконки */
-            border-radius: 50%;  /* Круглая форма */
-            background-color: #b0b0b0;  /* Цвет фона иконки */
-            color: rgb(0, 0, 0);  /* Цвет текста */
-            font-size: 25px;  /* Размер шрифта */
-            font-weight: bold;  /* Жирный шрифт */
-            text-align: center;
-            line-height: 45px; /* Центрирование буквы */
-        }
-
-        a {
-            text-decoration: none;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-
-    <!-- Верхняя панель с названием сайта и логином/именем -->
-    <div class="top-bar">
-        <!-- Название сайта -->
-        <h1><a href="{{ url_for('home') }}" style="text-decoration: none; color: black;">ChibiChange</a></h1>
-
-        <!-- Контейнер для правой части панели -->
-        <div class="top-bar-right">
+    <div class="header">
+        <div class="header-logo">
+            <a href="{{ url_for('home')}}"><img src="{{ url_for('static', filename='Chibichange.png') }}" alt="ChibiChange"></a>
+        </div>
+        <div class="header-tyan">
+            <img src="{{ url_for('static', filename='reg1.gif') }}" alt="gifka" class="head-gif">
+        </div>
+        <div class="header-reg">
             {% if current_user.is_authenticated %}
-                <!-- Круглая иконка с первой буквой имени -->
                 <a href="{{ url_for('profile') }}" title="Profile">
                     <div class="user-icon">{{ current_user.username[0] }}</div>
                 </a>
-                <!-- Иконка настроек -->
                 <a href="{{ url_for('settings') }}" title="Settings">
-                    <img src="{{ url_for('static', filename='settings-icon.png') }}" alt="Settings" width="45" height="45" style="margin-left: 0px; margin-top: 5px;">
+                    <img src="{{ url_for('static', filename='settings-icon.gif') }}" alt="Settings" width="45" height="45" style="margin-left: 0px; margin-top: 5px;">
                 </a>
             {% else %}
-                <a href="{{ url_for('login') }}" 
-                   style="text-decoration: none; color: black; font-size: 22px; padding: 6px 12px; border: 3px solid black; border-radius: 5px;">
-                    Login
-                </a>
-                <a href="{{ url_for('register') }}" 
-                   style="text-decoration: none; color: black; font-size: 22px; padding: 6px 12px; border: 3px solid black; border-radius: 5px;">
-                    Register
-                </a>
+                <a class="pressable-text" href="{{ url_for('login')}}">
+                    <h2>Login</h2>
+                </a>  
+                <a class="pressable-text" href="{{ url_for('register')}}">
+                    <h3>Register</h3>
+                </a>  
             {% endif %}
         </div>
+
     </div>
 
-    <p>Ruble</p>
+    <div class="main">
+        <a href="{{ url_for('currency_detail', currency_name='BTC') }}">
+            <div class="card">
+                <h1>BTC</h1>
+                <br>
+                <div class="change {% if currencies.get('BTC', {}).get('percent', 0) >= 0 %}positive{% else %}negative{% endif %}">
+                    <h3>{{ currencies.get('BTC', {}).get('percent', 0) }}%</h3>
+                </div>
+                <img src="{{ url_for('static', filename='BTC-USDT-1d-small.png') }}" alt="Graph" class="dbpictures">
+                <h3>${{ currencies.get('BTC', {}).get('price', 0) }}</h3>
+            </div>
+        </a>
 
-    <ul>
-        {% for item in currencies %}
-            <li>{{ item }}</li>
-        {% endfor %}
-    </ul>
+        <a href="{{ url_for('currency_detail', currency_name='ETH') }}">
+            <div class="card">
+                <h1>ETH</h1>
+                <br>
+                <div class="change {% if currencies.get('ETH', {}).get('percent', 0) >= 0 %}positive{% else %}negative{% endif %}">
+                    <h3>{{ currencies.get('ETH', {}).get('percent', 0) }}%</h3>
+                </div>
+                <img src="{{ url_for('static', filename='ETH-USDT-1d-small.png') }}" alt="Graph" class="dbpictures">
+                <h3>${{ currencies.get('ETH', {}).get('price', 0) }}</h3>
+            </div>
+        </a>
+        <a href="{{ url_for('currency_detail', currency_name='BNB') }}">
+            <div class="card">
+                <h1>BNB</h1>
+                <br>
+                <div class="change {% if currencies.get('BNB', {}).get('percent', 0) >= 0 %}positive{% else %}negative{% endif %}">
+                    <h3>{{ currencies.get('BNB', {}).get('percent', 0) }}%</h3>
+                </div>
+                <img src="{{ url_for('static', filename='BNB-USDT-1d-small.png') }}" alt="Graph" class="dbpictures">
+                <h3>${{ currencies.get('BNB', {}).get('price', 0) }}</h3>
+            </div>
+        </a>
+        <a href="{{ url_for('currency_detail', currency_name='XRP') }}">
+            <div class="card">
+                <h1>XRP</h1>
+                <br>
+                <div class="change {% if currencies.get('XRP', {}).get('percent', 0) >= 0 %}positive{% else %}negative{% endif %}">
+                    <h3>{{ currencies.get('XRP', {}).get('percent', 0) }}%</h3>
+                </div>
+                <img src="{{ url_for('static', filename='XRP-USDT-1d-small.png') }}" alt="Graph" class="dbpictures">
+                <h3>${{ currencies.get('XRP', {}).get('price', 0) }}</h3>
+            </div>
+        </a>
+        <a href="{{ url_for('currency_detail', currency_name='SOL') }}">
+            <div class="card">
+                <h1>SOL</h1>
+                <br>
+                <div class="change {% if currencies.get('SOL', {}).get('percent', 0) >= 0 %}positive{% else %}negative{% endif %}">
+                    <h3>{{ currencies.get('SOL', {}).get('percent', 0) }}%</h3>
+                </div>
+                <img src="{{ url_for('static', filename='SOL-USDT-1d-small.png') }}" alt="Graph" class="dbpictures">
+                <h3>${{ currencies.get('SOL', {}).get('price', 0) }}</h3>
+            </div>
+        </a>
+        <a href="{{ url_for('currency_detail', currency_name='ADA') }}">
+            <div class="card">
+                <h1>ADA</h1>
+                <br>
+                <div class="change {% if currencies.get('ADA', {}).get('percent', 0) >= 0 %}positive{% else %}negative{% endif %}">
+                    <h3>{{ currencies.get('ADA', {}).get('percent', 0) }}%</h3>
+                </div>
+                <img src="{{ url_for('static', filename='ADA-USDT-1d-small.png') }}" alt="Graph" class="dbpictures">
+                <h3>${{ currencies.get('ADA', {}).get('price', 0) }}</h3>
+            </div>
+        </a>
+        <a href="{{ url_for('currency_detail', currency_name='DOGE') }}">
+            <div class="card">
+                <h1>DOGE</h1>
+                <br>
+                <div class="change {% if currencies.get('DOGE', {}).get('percent', 0) >= 0 %}positive{% else %}negative{% endif %}">
+                    <h3>{{ currencies.get('DOGE', {}).get('percent', 0) }}%</h3>
+                </div>
+                <img src="{{ url_for('static', filename='DOGE-USDT-1d-small.png') }}" alt="Graph" class="dbpictures">
+                <h3>${{ currencies.get('DOGE', {}).get('price', 0) }}</h3>
+            </div>
+        </a>
+        <a href="{{ url_for('currency_detail', currency_name='DOT') }}">
+            <div class="card">
+                <h1>DOT</h1>
+                <br>
+                <div class="change {% if currencies.get('DOT', {}).get('percent', 0) >= 0 %}positive{% else %}negative{% endif %}">
+                    <h3>{{ currencies.get('DOT', {}).get('percent', 0) }}%</h3>
+                </div>
+                <img src="{{ url_for('static', filename='DOT-USDT-1d-small.png') }}" alt="Graph" class="dbpictures">
+                <h3>${{ currencies.get('DOT', {}).get('price', 0) }}</h3>
+            </div>
+        </a>
+        <a href="{{ url_for('currency_detail', currency_name='EUR') }}">
+            <div class="card">
+                <h1>EUR</h1>
+                <br>
+                <div class="change {% if currencies.get('EUR', {}).get('percent', 0) >= 0 %}positive{% else %}negative{% endif %}">
+                    <h3>{{ currencies.get('EUR', {}).get('percent', 0) }}%</h3>
+                </div>
+                <img src="{{ url_for('static', filename='EUR-USDT-1d-small.png') }}" alt="Graph" class="dbpictures">
+                <h3>${{ currencies.get('EUR', {}).get('price', 0) }}</h3>
+            </div>
+        </a>
+        <a href="{{ url_for('currency_detail', currency_name='AMP') }}">
+            <div class="card">
+                <h1>AMP</h1>
+                <br>
+                <div class="change {% if currencies.get('AMP', {}).get('percent', 0) >= 0 %}positive{% else %}negative{% endif %}">
+                    <h3>{{ currencies.get('AMP', {}).get('percent', 0) }}%</h3>
+                </div>
+                <img src="{{ url_for('static', filename='AMP-USDT-1d-small.png') }}" alt="Graph" class="dbpictures">
+                <h3>${{ currencies.get('AMP', {}).get('price', 0) }}</h3>
+            </div>
+        </a>
+        <a href="{{ url_for('currency_detail', currency_name='PEPE') }}">
+            <div class="card">
+                <h1>PEPE</h1>
+                <br>
+                <div class="change {% if currencies.get('PEPE', {}).get('percent', 0) >= 0 %}positive{% else %}negative{% endif %}">
+                    <h3>{{ currencies.get('PEPE', {}).get('percent', 0) }}%</h3>
+                </div>
+                <img src="{{ url_for('static', filename='PEPE-USDT-1d-small.png') }}" alt="Graph" class="dbpictures">
+                <h3>${{ "%.8f"|format(currencies.get('PEPE', {}).get('price', 0)|float) }}</h3>
+            </div>
+        </a>
+        <a href="{{ url_for('currency_detail', currency_name='LTC') }}">
+            <div class="card">
+                <h1>LTC</h1>
+                <br>
+                <div class="change {% if currencies.get('LTC', {}).get('percent', 0) >= 0 %}positive{% else %}negative{% endif %}">
+                    <h3>{{ currencies.get('LTC', {}).get('percent', 0) }}%</h3>
+                </div>
+                <img src="{{ url_for('static', filename='LTC-USDT-1d-small.png') }}" alt="Graph" class="dbpictures">
+                <h3>${{ currencies.get('LTC', {}).get('price', 0) }}</h3>
+            </div>
+        </a>
+    </div>
 
+
+    <div class="footer">
+        <p>ChibiChange.org</p>
+        <p>ChibiChangeHelp@gmail.com</p>
+    </div>
 </body>
 </html>
