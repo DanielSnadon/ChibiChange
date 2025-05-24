@@ -11,9 +11,9 @@
         <div class="header-logo">
             <a href="{{ url_for('home')}}"><img src="{{ url_for('static', filename='Chibichange.png') }}" alt="ChibiChange"></a>
         </div>
-        <!-- <div class="header-tyan">
+        <div class="header-tyan">
             <img src="{{ url_for('static', filename='reg.gif') }}" alt="gifka" class="head-gif">
-        </div> -->
+        </div>
         <div class="header-reg">
                 <a href="{{ url_for('profile') }}" title="Profile">
                     <div class="user-icon" style="margin-right: 5px">{{ current_user.username[0] }}</div>
@@ -33,7 +33,7 @@
             <label for="email-notifications">Yes, send me email notifications</label>
         </div>
         <a href="{{ url_for('change_password') }}" class="button-link">
-            <button type="button">Change Password</button>
+            <button type="button" class="button">Change Password</button>
         </a>
         <ul>
             {% for item in currencies %}
